@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}🦄 | Login!{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path("app_home") }}">🦄</a>
+        </div>
+    </nav>
+    <style rel="stylesheet">
+        .container {
+            max-width: 600px;
+            margin-top: 2em;
+        }
+    </style>
+    <div class="container">
+        <form>
+            <h1 >Login</h1>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+            <a  class="text-primary mx-2 text-decoration-none" href="{{ path("app_home") }}" >Forget password?</a>
+
+            <div class="mt-4">
+                <label for="basic-url" class="form-label">Or Sign in with: </label>
+            </div>
+            <div class="btn-group" role="group" aria-label="Third-party Auth">
+                <button type="button" class="btn btn-outline-primary">Github</button>
+                <button type="button" class="btn btn-outline-primary">Google</button>
+                <button type="button" class="btn btn-outline-primary">Twitter</button>
+                <button type="button" class="btn btn-outline-primary">Facebook</button>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}
