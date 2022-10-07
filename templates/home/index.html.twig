@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Emloyee{% endblock %}
+{% block style %}
+    <style>
+        .container {
+            max-width: 1000px;
+        }
+    </style>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/js/home.index.js') }}"></script>
+{% endblock %}
+{% block body %}
+
+    {% include("include/_navbar.html.twig") %}
+    <div class="container">
+        {{ form_start(form) }}
+        <div class="row mt-4 mb-4">
+            <div class="col">
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="col">
+                {{ form_widget(form.firstname) }}
+            </div>
+            <div class="col">
+                {{ form_widget(form.lastname) }}
+            </div>
+            <div class="col col-1">
+                {{ form_widget(form.submit, {'label':'Search'}) }}
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+        {% for message in app.flashes('error') %}
+
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" onclick="$('.alert').alert('close');" data-bs-dismiss="alert"
+                        aria-label="Close">
+                </button>
+            </div>
+        {% endfor %}
+        <a class="btn btn-primary" href="{{ path("app_employee_add") }}"><i class="bi bi-plus-square-dotted"></i> Add an
+            employee</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Hourly Salary</th>
+                <th scope="col">Birthday</th>
+                <th scope="col">Avatar</th>
+                <th scope="col">Actions</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for employee in employees %}
+                <tr>
+                    <th scope="row">{{ employee.id }}</th>
+                    <td>{{ employee.firstname|capitalize }} {{ employee.lastname|upper }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.salaryHourly | format_currency('EUR', {fraction_digit: 2}) }}</td>
+                    <td>{{ employee.birthday|date("d/m/Y") }}</td>
+                    <td>
+                        {% if(employee.photo is null) %}
+                            <img width="48" alt="default Image" src="{{ asset("photos/") ~ "defaultImage.png" }}">
+                        {% else %}
+                            <img width="48" alt="profile Image" src="{{ asset("photos/") ~ employee.photo }}">
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ path('app_employee_edit', {'id': employee.id}) }}"
+                           class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ path('app_employee_one', {'id': employee.id}) }}" class="btn btn-outline-primary"><i
+                                    class="bi bi-eye-fill"></i></a>
+                        <a href="{{ path('app_employee_remove', {'id': employee.id}) }}"
+                           class="btn btn-outline-primary"><i class="bi bi-trash3-fill"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}

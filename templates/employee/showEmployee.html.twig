@@ -1,0 +1,63 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ employee.firstname|capitalize }}{% endblock %}
+
+{% block body %}
+    {% include('include/_navbar.html.twig') %}
+    <div class="main-content">
+            <!-- Table -->
+            <div class="row">
+                <div class="col-xl-8 m-auto order-xl-2 mb-5 mb-xl-0">
+                    <div class="card card-profile shadow">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image">
+                                    <a href="#">
+                                        <img alt="employee photo" src="{{ asset("photos/") ~ employee.photo }}" class="rounded-circle">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                            <div class="d-flex justify-content-between">
+                                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0 pt-md-4">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                        <div>
+                                            <span class="heading">{{ employee.id }}</span>
+                                            <span class="description">ID</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">{{ employee.email }}</span>
+                                            <span class="description">Email</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">{{ employee.birthday|date("Y/m/d") }}</span>
+                                            <span class="description">Birthday</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h3>
+                                    {{ employee.firstname|capitalize }} {{ employee.lastname|upper }}<span class="font-weight-light"></span>
+                                </h3>
+                                <div class="h5 font-weight-300">
+                                    <i class="ni location_pin mr-2"></i>Hourly Salary: {{ employee.salaryHourly|format_currency('EUR', {fraction_digit: 2}) }}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if(employee is not defined) %}
+        New Employee
+    {% else %}
+        {{ employee.firstname|capitalize }} {{ employee.lastname|upper }}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <style>
+        .container {
+            max-width: 600px;
+        }
+    </style>
+{% include('include/_navbar.html.twig') %}
+   <div class="container">
+       {{ form_start(form) }}
+        {{ form_widget(form) }}
+       <a class="btn btn-outline-primary" href="{{ path("app_home") }}"> Cancel</a>
+        <input class="btn btn-primary" type="submit" value="Save">
+       {{ form_end(form) }}
+   </div>
+
+{% endblock %}
