@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Employee;
 use App\Form\EmployeeType;
-use App\Form\SearchType;
+use App\Form\SearchEmployeeType;
 use App\Repository\EmployeeRepository;
 use App\Services\Search;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,28 +19,58 @@ class HomeController extends AbstractController
     public function searchEmployee(EmployeeRepository $employeeRepository, Request $request): Response
     {
         $search = new Search();
-        $form = $this->createForm(SearchType::class, $search);
+        $form = $this->createForm(SearchEmployeeType::class, $search);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $email = $form->get('email')->getData();
-            $firstname = $form->get('firstname')->getData();
-            $lastname = $form->get('lastname')->getData();
 
-            $employees = $employeeRepository->search($email, $firstname, $lastname);
+            $keyword = $form->get('keyword')->getData();
+            $employees = $employeeRepository->search($keyword);
 
             if (count($employees) == 0) {
                 $this->addFlash('error', 'Not found!');
+                return $this->render('employee/search.html.twig', [
+                    'form' => $form->createView(),
+                    'employees' => $employees,
+                    'employees_count' => count($employees),
+                    'keyword' => $keyword
+                ]);
             } else {
-                return $this->render('home/index.html.twig', ['form' => $form->createView(), 'employees' => $employees]);
+                return $this->render('employee/search.html.twig', [
+                    'form' => $form->createView(),
+                    'employees' => $employees,
+                    'employees_count' => count($employees),
+                    'keyword' => $keyword
+                ]);
             }
-        };
+        }
+
+        $keyword = $request->query->get('s');
+        if (!is_null($keyword)) {
+            $employees = $employeeRepository->search($keyword);
+            if (count($employees) == 0) {
+                $this->addFlash('error', 'Not found!');
+                return $this->render('employee/search.html.twig', [
+                    'form' => $form->createView(),
+                    'employees' => $employees,
+                    'employees_count' => count($employees),
+                    'keyword' => $keyword
+                ]);
+            } else {
+                return $this->render('employee/search.html.twig', [
+                    'form' => $form->createView(),
+                    'employees' => $employees,
+                    'employees_count' => count($employees),
+                    'keyword' => $keyword
+                ]);
+            }
+        }
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
             'employees' => $employeeRepository->findAll()
         ]);
-
     }
+
 
     #[Route('/employee/add', name: 'app_employee_add')]
     public function addEmployee(EmployeeRepository $employeeRepository, Request $request): Response

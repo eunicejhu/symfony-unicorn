@@ -39,15 +39,13 @@ class EmployeeRepository extends ServiceEntityRepository
         }
     }
 
-    public function search(?string $email = '', ?string $firstname = '', ?string $lastname =''): array
+    public function search(?string $keyword = ''): array
     {
         return $this->createQueryBuilder('e')
-            ->where('e.email =:email')
-            ->orWhere('e.firstname =:firstname')
-            ->orWhere('e.lastname =:lastname')
-            ->setParameter('email', $email)
-            ->setParameter('firstname', $firstname)
-            ->setParameter('lastname', $lastname)
+            ->where('e.email =:keyword')
+            ->orWhere('e.firstname =:keyword')
+            ->orWhere('e.lastname =:keyword')
+            ->setParameter('keyword', $keyword)
             ->getQuery()
             ->getResult();
     }

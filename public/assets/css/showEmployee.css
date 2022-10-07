@@ -40,7 +40,6 @@
 }
 
 
-
 figcaption,
 footer,
 main,
@@ -258,7 +257,6 @@ hr {
     font-weight: 600;
     line-height: 1.5;
     display: inline-block;
-    padding: .625rem 1.25rem;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -334,7 +332,7 @@ hr {
 }
 
 .btn-info:not(:disabled):not(.disabled):active:focus {
-    box-shadow:  0 0 0 0 rgba(17, 205, 239, .5);
+    box-shadow: 0 0 0 0 rgba(17, 205, 239, .5);
 }
 
 .btn-default {
@@ -367,7 +365,7 @@ hr {
 }
 
 .btn-default:not(:disabled):not(.disabled):active:focus {
-    box-shadow:  0 0 0 0 rgba(23, 43, 77, .5);
+    box-shadow: 0 0 0 0 rgba(23, 43, 77, .5);
 }
 
 .btn-sm {
@@ -389,7 +387,7 @@ hr {
     background-clip: border-box;
 }
 
-.card>hr {
+.card > hr {
     margin-right: 0;
     margin-left: 0;
 }
@@ -568,9 +566,9 @@ button.bg-default:focus {
         page-break-after: avoid;
     }
 
-@page {
-      size: a3;
-  }
+    @page {
+        size: a3;
+    }
 }
 
 @keyframes floating-lg {
@@ -678,23 +676,23 @@ button.bg-default:focus {
     padding: 1rem 0;
 }
 
-.card-profile-stats>div {
+.card-profile-stats > div {
     margin-right: 1rem;
     padding: .875rem;
     text-align: center;
 }
 
-.card-profile-stats>div:last-child {
+.card-profile-stats > div:last-child {
     margin-right: 0;
 }
 
-.card-profile-stats>div .heading {
+.card-profile-stats > div .heading {
     font-size: 1.1rem;
     font-weight: bold;
     display: block;
 }
 
-.card-profile-stats>div .description {
+.card-profile-stats > div .description {
     font-size: .875rem;
     color: #adb5bd;
 }
@@ -714,29 +712,29 @@ button.bg-default:focus {
 }
 
 @media (min-width: 768px) {
-@keyframes show-navbar-dropdown {
-0% {
-    transition: visibility .25s, opacity .25s, transform .25s;
-    transform: translate(0, 10px) perspective(200px) rotateX(-2deg);
-    opacity: 0;
-}
+    @keyframes show-navbar-dropdown {
+        0% {
+            transition: visibility .25s, opacity .25s, transform .25s;
+            transform: translate(0, 10px) perspective(200px) rotateX(-2deg);
+            opacity: 0;
+        }
 
-100% {
-    transform: translate(0, 0);
-    opacity: 1;
-}
-}
-
-@keyframes hide-navbar-dropdown {
-    from {
-        opacity: 1;
+        100% {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
     }
 
-    to {
-        transform: translate(0, 10px);
-        opacity: 0;
+    @keyframes hide-navbar-dropdown {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            transform: translate(0, 10px);
+            opacity: 0;
+        }
     }
-}
 }
 
 @keyframes show-navbar-collapse {

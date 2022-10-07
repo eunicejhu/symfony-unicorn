@@ -1,49 +1,61 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Emloyee{% endblock %}
-{% block style %}
+{% block title %}Employees{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
     <style>
-        .container {
-            max-width: 1000px;
+        div > #clear-search {
+            margin-left: -42px;
+            margin-top: 9px;
+        }
+
+
+        #search-input::placeholder {
+            font-style: italic;
+        }
+
+
+        #search-submit {
+            padding-left: 30px;
+            background: #0d6efd 10% center / 16% no-repeat url("{{ asset('assets/img/search.svg') }}");
         }
     </style>
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('assets/js/home.index.js') }}"></script>
+
 {% endblock %}
 {% block body %}
-
     {% include("include/_navbar.html.twig") %}
     <div class="container">
-        {{ form_start(form) }}
-        <div class="row mt-4 mb-4">
+
+        <div class="row  mt-4 mb-4">
             <div class="col">
-                {{ form_widget(form.email) }}
+                <a class="btn btn-primary" href="{{ path("app_employee_add") }}"><i class="bi bi-person-plus-fill"></i>
+                    Add an
+                    employee</a>
             </div>
-            <div class="col">
-                {{ form_widget(form.firstname) }}
-            </div>
-            <div class="col">
-                {{ form_widget(form.lastname) }}
-            </div>
-            <div class="col col-1">
-                {{ form_widget(form.submit, {'label':'Search'}) }}
+            <div class="col-6">
+                {{ form_start(form, {'attr': {'id': "search-form"}}) }}
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            {{ form_widget(form.keyword,{'id': 'search-input'}) }}
+                            <button id="clear-search" type="button" class="btn-close invisible"
+                                    aria-label="Close"></button>
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        {{ form_widget(form.submit, {'label':'search', 'id': 'search-submit'}) }}
+                    </div>
+                </div>
+
+                {{ form_end(form) }}
             </div>
         </div>
 
-        {{ form_end(form) }}
-        {% for message in app.flashes('error') %}
-
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" onclick="$('.alert').alert('close');" data-bs-dismiss="alert"
-                        aria-label="Close">
-                </button>
-            </div>
-        {% endfor %}
-        <a class="btn btn-primary" href="{{ path("app_employee_add") }}"><i class="bi bi-plus-square-dotted"></i> Add an
-            employee</a>
         <table class="table">
             <thead>
             <tr>
@@ -84,6 +96,7 @@
             {% endfor %}
             </tbody>
         </table>
+
     </div>
 
 

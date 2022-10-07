@@ -8,59 +8,23 @@ class Search
     /**
      * @var string
      */
-    private $email;
-    private $firstname;
-    private $lastname;
+    private $keyword;
 
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getKeyword(): string
     {
-        return $this->email;
+        return $this->keyword;
     }
 
     /**
-     * @param string $email
+     * @param string $keyword
      */
-    public function setEmail(string $email): self
+    public function setKeyword(string $keyword): void
     {
-        $this->email = $email;
-        return $this;
+        $this->keyword = $keyword;
     }
 
-    /**
-     * @return string
-     */
-    public function getFirstname(): string
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * @param mixed $firstname
-     */
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLastname(): string
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * @param mixed $lastname
-     */
-    public function setLastname(string $lastname): self
-    {
-        $this->lastname = $lastname;
-        return $this;
-    }
 
 }
